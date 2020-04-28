@@ -1,0 +1,25 @@
+{
+  "type": "module",
+  "name": "nodejs_stuff",
+  "version": "1.0.0",
+  "description": "stuff",
+  "main": "src/app.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "lowdb": "^1.0.0",
+    "node-fetch": "^2.6.0",
+    "rxjs": "^6.5.3",
+    "rxjs-compat": "^6.5.3",
+    "shortid": "^2.2.15",
+    "typescript": "^3.7.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.1"
+  },
+  "scripts": {
+    "start": "node src/app.js",
+    "dev": "nodemon --watch src src/app.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,25 @@
+{
+  "friends": [
+    {
+      "firstName": "Pet",
+      "surName": "da vee Lar",
+      "emailAddress": "pet.de.vee.lar@test.com",
+      "id": "vOgqytT-"
+    },
+    {
+      "firstName": "Testie",
+      "surName": "von Tester",
+      "emailAddress": "Test_von_Tester@test.com",
+      "id": "VKPP9LUv"
+    },
+    {
+      "firstName": "Noel",
+      "surName": "die Keyzer",
+      "emailAddress": "noel.die.key@key.com",
+      "id": "ddKZKM5rp"
+    }
+  ],
+  "collections": [
+    "friends"
+  ]
+}
