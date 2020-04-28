@@ -1,8 +1,8 @@
 {
   "type": "module",
-  "name": "nodejs_stuff",
+  "name": "git_raket",
   "version": "1.0.0",
-  "description": "stuff",
+  "description": "Raket API",
   "main": "src/app.js",
   "dependencies": {
     "express": "^4.17.1",
