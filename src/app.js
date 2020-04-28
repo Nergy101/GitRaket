@@ -24,9 +24,13 @@ database.seedFriendsData(db)
 
 app.get('/', async (_, res) => res.status(200).send(db.get('collections').value()))
 
-app.get('/friends', async (_, res) => res.status(200).send(db.get('friends').value()))
-
-app.get('/friends/emails', async (_, res) => res.status(200).send(db.get('friends').map('emailAddress').value()))
+app.get('/friends', async (req, res) => {
+    if (req.query) {
+        res.status(200).send(db.get('friends').map(req.query.field).value())
+    } else {
+        res.status(200).send(db.get('friends').value())
+    }
+})
 
 app.get('/friends/top/:amount', async (req, res) => res.status(200).send(db.get('friends').sortBy('id').take(req.params.amount).value()))
 
@@ -56,7 +60,7 @@ app.get('/friends/:id', async (req, res) => {
     }
 })
 
-app.post('/friends', (req, res) => {
+app.post('/friends', async (req, res) => {
     try {
         req.body.id = shortid.generate()
         db.get('friends').push(req.body).write()
@@ -67,7 +71,7 @@ app.post('/friends', (req, res) => {
     }
 })
 
-app.put('/friends/:id', (req, res) => {
+app.put('/friends/:id', async (req, res) => {
     try {
         db.get('friends').find({
             id: req.params.id
@@ -79,7 +83,7 @@ app.put('/friends/:id', (req, res) => {
     }
 })
 
-app.delete('/friends/:id', (req, res) => {
+app.delete('/friends/:id', async (req, res) => {
     try {
         db.get('friends').remove({
             id: req.params.id
@@ -92,6 +96,7 @@ app.delete('/friends/:id', (req, res) => {
         res.status(404).send(err)
     }
 })
+
 app.get('/:resource/:id', async (req, res) => {
     let resource = req.params.resource
     try {
@@ -111,7 +116,7 @@ app.get('/:resource/:id', async (req, res) => {
     }
 })
 
-app.get('/:resource', (req, res) => {
+app.get('/:resource', async (req, res) => {
     let resource = req.params.resource
     try {
         if (!db.has(resource).value()) {
@@ -125,7 +130,7 @@ app.get('/:resource', (req, res) => {
     }
 })
 
-app.post('/:resource', (req, res) => {
+app.post('/:resource', async (req, res) => {
     let resource = req.params.resource
     try {
         if (!db.has(resource).value()) {
@@ -141,7 +146,7 @@ app.post('/:resource', (req, res) => {
     }
 })
 
-app.put('/:resource/:id', (req, res) => {
+app.put('/:resource/:id', async (req, res) => {
     let resource = req.params.resource
     try {
         db.get(resource).find({
@@ -154,7 +159,7 @@ app.put('/:resource/:id', (req, res) => {
     }
 })
 
-app.delete('/:resource/:id', (req, res) => {
+app.delete('/:resource/:id', async (req, res) => {
     let resource = req.params.resource
     try {
         db.get(resource).remove({
